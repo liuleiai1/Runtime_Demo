@@ -22,9 +22,9 @@
    
 //    Runtime_BasicTest();
 //    Runtime_ChangeMethod();
-//    Runtime_AddMethod();
+    Runtime_AddMethod();
 //    Runtime_AddProperty();
-    [self DictToModel];
+//    [self DictToModel];
 }
 
 // 基本调用

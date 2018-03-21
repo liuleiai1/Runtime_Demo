@@ -33,18 +33,44 @@ void method2(id self, SEL _cmd, NSNumber *meter) {
         // IMP: 方法实现 => 函数 => 函数入口 => 函数名
         // type: 方法类型
         class_addMethod(self, sel, (IMP)method1, "v@");
-        
+
         return YES;
     }
-    
+
     if (sel == NSSelectorFromString(@"run:")) {
-        
+
         class_addMethod(self, sel, (IMP)method2, "v@:@");
-        
+
         return YES;
     }
     
     return [super resolveInstanceMethod:sel];    
 }
 
+// 消息转发
+- (id)forwardingTargetForSelector:(SEL)aSelector {
+    
+    return [super forwardingTargetForSelector:aSelector];
+}
+
+- (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector {
+    
+    return nil;
+}
+
+- (void)doesNotRecognizeSelector:(SEL)aSelector {
+    
+}
+
+- (void)forwardInvocation:(NSInvocation *)anInvocation {
+    
+}
+/*
+ *  Objective-C 的运行时会给你三次拯救程序的机会：
+ 
+    Method resolution
+    Fast forwarding
+    Normal forwarding
+    每一个没有调取，则会按顺序执行下一个方法去找寻函数的实现
+ **/
 @end
